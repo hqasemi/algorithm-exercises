@@ -29,25 +29,23 @@ class CoinProblemSolver:
         self.__bags_contents = bags_contents
 
     def solve(self) -> bool:
-        low = min(self.__bags_contents)
-        high = max(self.__bags_contents)
+        low_item = min(self.__bags_contents)
+        high_item = max(self.__bags_contents)
 
-        while low <= high:
-            mid = (high + low) // 2
-            compare_result: ComparisonResult = self.__compare_summation_of_two_halves(mid)
+        while low_item <= high_item:
+            mid_item = (high_item + low_item) // 2
+            compare_result: ComparisonResult = self.__compare_summation_of_two_halves(mid_item)
             if compare_result == ComparisonResult.EQUAL:
                 return True
 
             elif compare_result == ComparisonResult.SMALLER:
-                low = mid + 1
+                low_item = mid_item + 1
             else:
-                high = mid - 1
+                high_item = mid_item - 1
 
         return False
 
-    def __compare_summation_of_two_halves(self, mid: int) -> ComparisonResult:
-        mid_item = mid
-
+    def __compare_summation_of_two_halves(self, mid_item: int) -> ComparisonResult:
         sum_of_first_half = 0
         sum_of_second_half = 0
         for idx, item in enumerate(self.__bags_contents):
